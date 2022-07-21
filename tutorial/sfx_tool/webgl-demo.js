@@ -1,5 +1,3 @@
-import './my_lib.js'
-
 main();
 
 //
@@ -78,36 +76,6 @@ function main() {
 // have one object -- a simple two-dimensional square.
 //
 
-function rotate2d(pos, tho){
-  rotationMatrix = CreateRotation2DMat(tho);
-  var ret = pos.Mul(rotationMatrix);
-  return new MyVector2(ret[0], ret[1])
-}
-
-function init_line_info(pos_list, colors){
-  var line_half_size = 5
-  var half_pi = 3.1415925 / 2
-  var res = []
-  var up_vector, down_vector;
-  for (idx=0; idx < pos_list.length; idx++){
-    pos1 = new MyVecotr2(pos_list[idx][0], pos_list[idx][1])
-    pos2 = new MyVecotr2(pos_list[idx+1][0], pos_list[idx+1][1])
-    dir = pos2.Sub(pos1);
-    dir.Normalized()
-    up_vector_dir = rotate2d(dir, half_pi);
-    down_vector_dir = rotate2d(dir, -half_pi);
-    up_vector = up_vector_dir.MulNum(line_half_size);
-    down_vector = down_vector_dir.MulNum(line_half_size);
-    res[res.length] = pos1.Add(up_vector);
-    res[res.length] = pos1.Add(dow_vector);
-    if (idx == pos_list - 1){
-      res[res.length] = pos2.Add(up_vector);
-      res[res.length] = pos2.Add(dow_vector);
-    }
-  }
-  return res;
-}
-
 function initBuffers(gl) {
 
   // Create a buffer for the square's positions.
@@ -121,12 +89,13 @@ function initBuffers(gl) {
 
   // Now create an array of positions for the square.
 
-  const positions = [
-     1.0,  1.0,
-    -1.0,  1.0,
-     1.0, -1.0,
-    -1.0, -1.0,
-  ];
+  var position_pice = init_line_info([[1, 0], [5, 5], [10, 5]], 2);
+  var positions = [];
+  for(var idx = 0; idx < position_pice.length; idx++){
+    var pos = position_pice[idx];
+    positions[positions.length] = pos.x;
+    positions[positions.length] = pos.y;
+  }
 
   // Now pass the list of positions into WebGL to build the
   // shape. We do this by creating a Float32Array from the

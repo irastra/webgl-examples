@@ -98,8 +98,8 @@ function rotate2d(pos, tho){
     return new MyVector2(ret.data_tabel[0], ret.data_tabel[1])
 }
 
-function init_line_info(pos_list){
-    var line_half_size = 5
+function init_line_info(pos_list, size){
+    var line_half_size = Math.max(1, size/2.0);
     var half_pi = 3.1415925 / 2
     var res = []
     var up_vector, down_vector;
@@ -122,5 +122,5 @@ function init_line_info(pos_list){
     return res;
 }
 
-ret = init_line_info([[0, 0], [1, 0]]);
+ret = init_line_info([[0, 0], [1, 0]], 2);
 console.log(ret);
