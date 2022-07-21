@@ -89,13 +89,14 @@ function initBuffers(gl) {
 
   // Now create an array of positions for the square.
 
-  var position_pice = init_line_info([[1, 0], [5, 5], [10, 5]], 2);
+  var position_pice = init_line_info([[1, 0], [5, 0], [10, 10]], 2);
   var positions = [];
   for(var idx = 0; idx < position_pice.length; idx++){
     var pos = position_pice[idx];
     positions[positions.length] = pos.x;
     positions[positions.length] = pos.y;
   }
+  console.log("----->", positions);
 
   // Now pass the list of positions into WebGL to build the
   // shape. We do this by creating a Float32Array from the
@@ -110,6 +111,8 @@ function initBuffers(gl) {
     1.0,  0.0,  0.0,  1.0,    // red
     0.0,  1.0,  0.0,  1.0,    // green
     0.0,  0.0,  1.0,  1.0,    // blue
+    1.0,  1.0,  1.0,  1.0,    // white
+    1.0,  0.0,  0.0,  1.0,    // red
   ];
 
   const colorBuffer = gl.createBuffer();
@@ -224,7 +227,7 @@ function drawScene(gl, programInfo, buffers) {
 
   {
     const offset = 0;
-    const vertexCount = 4;
+    const vertexCount = 6;
     gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
   }
 }
