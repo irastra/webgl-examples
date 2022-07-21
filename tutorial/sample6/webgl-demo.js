@@ -69,8 +69,8 @@ function main() {
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
   const buffers = initBuffers(gl);
-
-  const texture = loadTexture(gl, 'cubetexture.png');
+  var texture_path = 'cubetexture.png'
+  const texture = loadTexture(gl, texture_path);
 
   var then = 0;
 
@@ -267,6 +267,7 @@ function loadTexture(gl, url) {
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     }
   };
+  image.crossOrigin = ''
   image.src = url;
 
   return texture;
